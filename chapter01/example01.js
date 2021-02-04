@@ -35,6 +35,7 @@ let invoice =
     }
   ]
 
+// 최상위
 function statement(invoice, plays) {
   let totalAmount = 0;
   let volumeCredits = 0;
@@ -45,7 +46,7 @@ function statement(invoice, plays) {
 
   for (let perf of invoice[0].performances) {
     const play = plays[perf.playID];
-    let thisAmount = amountFor(perf, play)
+    let thisAmount = amountFor(perf, play)  // 추출한 함수 이용
 
 
     // increase point
@@ -67,8 +68,9 @@ function statement(invoice, plays) {
 
 console.log(statement(invoice, plays))
 
+// statement() 함수..
 function amountFor(perf, play) {
-  let thisAmount = 0;
+  let result = 0;
 
   switch (play.type) {
     case "tragedy":
@@ -87,5 +89,5 @@ function amountFor(perf, play) {
     default:
       throw new Error(`Unknown type : ${perf.type}`)
   }
-  return thisAmount;
+  return result;
 }
