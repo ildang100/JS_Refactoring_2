@@ -69,25 +69,25 @@ function statement(invoice, plays) {
 console.log(statement(invoice, plays))
 
 // statement() 함수..
-function amountFor(perf, play) {
+function amountFor(aPerformance, play) {
   let result = 0;
 
   switch (play.type) {
     case "tragedy":
       thisAmount = 40000;
-      if (perf.audience > 30) {
-        thisAmount += 10000 * (perf.audience - 30);
+      if (aPerformance.audience > 30) {
+        thisAmount += 10000 * (aPerformance.audience - 30);
       }
       break;
     case "comedy": // 
       thisAmount = 30000;
-      if (perf.audience > 20) {
-        thisAmount += 10000 + 500 * (perf.audience - 20)
+      if (aPerformance.audience > 20) {
+        thisAmount += 10000 + 500 * (aPerformance.audience - 20)
       }
-      thisAmount += 300 * perf.audience
+      thisAmount += 300 * aPerformance.audience
       break
     default:
-      throw new Error(`Unknown type : ${perf.type}`)
+      throw new Error(`Unknown type : ${aPerformance.type}`)
   }
-  return result;
+  return thisAmount;
 }
