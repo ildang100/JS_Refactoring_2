@@ -46,7 +46,7 @@ function statement(invoice, plays) {
 
   for (let perf of invoice[0].performances) {
     // const play = playFor(perf)  // 우편을 함수로 추출  
-    let thisAmount = amountFor(perf, playFor(perf))  // 추출한 함수 이용 
+    let thisAmount = amountFor(perf)  // 추출한 함수 이용 
 
 
     // increase point
@@ -74,10 +74,10 @@ function playFor(aPerformance) {
 }
 
 // statement() 함수..
-function amountFor(aPerformance, play) {
+function amountFor(aPerformance) {
   let result = 0;
 
-  switch (play.type) {
+  switch (playFor(aPerformance).type) {
     case "tragedy":
       thisAmount = 40000;
       if (aPerformance.audience > 30) {
@@ -92,7 +92,7 @@ function amountFor(aPerformance, play) {
       thisAmount += 300 * aPerformance.audience
       break
     default:
-      throw new Error(`Unknown type : ${aPerformance.type}`)
+      throw new Error(`Unknown type : ${layFor(aPerformance).type}`)
   }
   return thisAmount;
 }
