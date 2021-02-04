@@ -45,18 +45,18 @@ function statement(invoice, plays) {
   }).format;
 
   for (let perf of invoice[0].performances) {
-    const play = plays[perf.playID];
-    let thisAmount = amountFor(perf, play)  // 추출한 함수 이용
+    // const play = playFor(perf)  // 우편을 함수로 추출  
+    let thisAmount = amountFor(perf, playFor(perf))  // 추출한 함수 이용 
 
 
     // increase point
     volumeCredits += Math.max(perf.audience - 30, 0)
     // if there are 5 audience in times, service add point
-    if ("comedy" === play.type) {
+    if ("comedy" === playFor(perf).type) { // play 를 playFor() 호출로 변경
       volumeCredits += Math.floor(perf.audience / 5);
     }
     // print bills
-    result += `  ${play.name}: ${format(thisAmount / 100)} (${perf.audience} seats)\n`;
+    result += `  ${playFor(perf).name}: ${format(thisAmount / 100)} (${perf.audience} seats)\n`; // play 를 playFor() 호출로 변경
     totalAmount += thisAmount
   }
 
@@ -67,6 +67,11 @@ function statement(invoice, plays) {
 }
 
 console.log(statement(invoice, plays))
+
+// statement() 함수..
+function playFor(aPerformance) {
+  return plays[aPerformance.playID]
+}
 
 // statement() 함수..
 function amountFor(aPerformance, play) {
